@@ -1,5 +1,5 @@
 require('rspec')
-require('project_creator')
+require('sinatra_template_script')
 
 describe('#Project') do
   it("create new project") do
