@@ -18,9 +18,9 @@ class Project
       FileUtils.mkdir("public")
         FileUtils.cd "public"
         FileUtils.mkdir("css")
-        FileUtils.touch("css/style.css")
+        FileUtils.touch("css/styles.css")
         FileUtils.mkdir("js")
-        FileUtils.touch("js/script.js")
+        FileUtils.touch("js/scripts.js")
         FileUtils.mkdir("img")
       FileUtils.cd ".."
       FileUtils.touch("Gemfile")
