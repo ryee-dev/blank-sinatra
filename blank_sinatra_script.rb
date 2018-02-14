@@ -24,10 +24,12 @@ class Project
         FileUtils.mkdir("img")
       FileUtils.cd ".."
       FileUtils.touch("Gemfile")
-        File.open("Gemfile", 'w') { |file| file.write("source 'https://rubygems.org' \n\ngem 'sinatra' \ngem 'rspec' \ngem 'pry' \ngem 'sinatra-contrib'")}
-
+        File.open("Gemfile", 'w') { |file| file.write(
+          "source 'https://rubygems.org'\n\ngem 'sinatra'\ngem 'rspec'\ngem 'pry'\ngem 'sinatra-contrib'")}
         system "bundle install"
       FileUtils.touch("app.rb")
+        File.open("app.rb", 'w') { |file| file.write(
+          "require('sinatra')\nrequire('sinatra/reloader')\nalso_reload('lib/**.*.rb')\nrequire('pry')\n\nget('/') do\n  erb(:input)\nend\n\nget('/output') do\n  erb(:output)\nend")}
       FileUtils.touch("lib/#{@project_name}.rb")
       FileUtils.touch("spec/#{@project_name}_spec.rb")
       FileUtils.touch("spec/#{@project_name}_integration_spec.rb")
@@ -36,7 +38,8 @@ class Project
           FileUtils.touch("input.erb")
           FileUtils.touch("output.erb")
           FileUtils.touch("home.erb")
-            File.open("layout.erb", 'w') {|file| file.write("<!DOCTYPE html>\n<html>\n  <head>\n    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>\n    <link rel='stylesheet' href='../css/styles.css'>\n    <script type='text/javascript' src='js/scripts.js'></script>\n    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>\n    <title>Insert Title</title>\n  </head>\n  <body> \n    <div class='container'> \n      <%= yield %> \n    </div> \n  </body> \n</html>")}
+            File.open("layout.erb", 'w') {|file| file.write(
+              "<!DOCTYPE html>\n<html>\n  <head>\n    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>\n    <link rel='stylesheet' href='../css/styles.css'>\n    <script type='text/javascript' src='js/scripts.js'></script>\n    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>\n    <title>Insert Title</title>\n  </head>\n  <body> \n    <div class='container'>\n      <%= yield %>\n    </div>\n  </body> \n</html>")}
 
       FileUtils.cd ".."
     file_contents = "#!/usr/bin/ruby\n\n"
