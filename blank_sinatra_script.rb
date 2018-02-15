@@ -18,9 +18,9 @@ class Project
       FileUtils.mkdir("public")
         FileUtils.cd "public"
         FileUtils.mkdir("css")
-        FileUtils.touch("../css/styles.css")
+        FileUtils.touch("/css/styles.css")
         FileUtils.mkdir("js")
-        FileUtils.touch("../js/scripts.js")
+        FileUtils.touch("/js/scripts.js")
         FileUtils.mkdir("img")
       FileUtils.cd ".."
       FileUtils.touch("Gemfile")
@@ -39,7 +39,7 @@ class Project
           FileUtils.touch("output.erb")
           FileUtils.touch("home.erb")
             File.open("layout.erb", 'w') {|file| file.write(
-              "<!DOCTYPE html>\n<html>\n  <head>\n    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>\n    <link rel='stylesheet' href='../css/styles.css'>\n    <script type='text/javascript' src='js/scripts.js'></script>\n    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>\n    <title>Insert Title</title>\n  </head>\n  <body> \n    <div class='container'>\n      <%= yield %>\n    </div>\n  </body> \n</html>")}
+              "<!DOCTYPE html>\n<html>\n  <head>\n    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>\n    <link rel='stylesheet' href='../css/styles.css'>\n    <script type='text/javascript' src='../js/scripts.js'></script>\n    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>\n    <title>Insert Title</title>\n  </head>\n  <body> \n    <div class='container'>\n      <%= yield %>\n    </div>\n  </body> \n</html>")}
 
       FileUtils.cd ".."
     file_contents = "#!/usr/bin/ruby\n\n"
