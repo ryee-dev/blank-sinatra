@@ -27,14 +27,15 @@ class Project
         File.open("Gemfile", 'w') { |file| file.write(
           "source 'https://rubygems.org'\n\ngem 'sinatra'\ngem 'rspec'\ngem 'pry'\ngem 'sinatra-contrib'")}
         system "bundle install"
+        system "bundle update"
       FileUtils.touch("app.rb")
         File.open("app.rb", 'w') { |file| file.write(
-          "require('sinatra')\nrequire('sinatra/reloader')\nalso_reload('lib/**.*.rb')\nrequire('pry')\n\nget('/') do\n  erb(:input)\nend\n\nget('/output') do\n  erb(:output)\nend")}
+          "require('sinatra')\nrequire('sinatra/reloader')\nalso_reload('lib/**.*.rb')\nrequire('pry')\nrequire('pg')\n\nget('/') do\n  erb(:input)\nend\n\nget('/output') do\n  erb(:output)\nend")}
       FileUtils.touch("lib/#{@project_name}.rb")
       FileUtils.touch("spec/#{@project_name}_spec.rb")
       FileUtils.touch("spec/#{@project_name}_integration_spec.rb")
         FileUtils.cd "views"
-          FileUtils.touch("layout.erb")
+          FileUtils.touch("RENAMETHIS.erb")
           FileUtils.touch("input.erb")
           FileUtils.touch("output.erb")
           FileUtils.touch("home.erb")
@@ -50,7 +51,7 @@ class Project
     end
 
     File.open("lib/#{@project_name}.rb", 'w') { |file| file.write(file_contents) }
-    File.open("spec/#{@project_name}_spec.rb", 'w') { |file| file.write("require\('rspec')\nrequire('#{@project_name}'\)\nrequire('pry')\n\ndescribe('#{@project_name}'\) do\n  it(\"create new project\") do\n  expect().to(eq())\n   end\nend") }
+    File.open("spec/#{@project_name}_spec.rb", 'w') { |file| file.write("require\('rspec')\nrequire('#{@project_name}'\)\nrequire('pry')\nrequire('pg')\n\ndescribe('#{@project_name}'\) do\n  it(\"create new project\") do\n  expect().to(eq())\n   end\nend") }
   end
 end
 
