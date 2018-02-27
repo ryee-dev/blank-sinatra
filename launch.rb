@@ -12,6 +12,12 @@ class Project
     puts FileUtils.pwd()
     FileUtils.mkdir(@project_name)
       FileUtils.cd "#{@project_name}"
+      FileUtils.mkdir("config")
+        FileUtils.cd "config"
+        FileUtils.touch("database.yml")
+        File.open("database.yml", 'w') { |file| file.write(
+          "development \n  adapter: postgresql\n  database: (insert database here)\n\ntest\n  adapter: postgresql\n  database: (insert test database here)")}
+      FileUtils.cd ".."
       FileUtils.mkdir("lib")
       FileUtils.mkdir("views")
       FileUtils.mkdir("spec")
@@ -25,8 +31,13 @@ class Project
       FileUtils.cd ".."
       FileUtils.touch("Gemfile")
         File.open("Gemfile", 'w') { |file| file.write(
-          "source 'https://rubygems.org'\n\ngem 'sinatra'\ngem 'rspec'\ngem 'pry'\ngem 'sinatra-contrib'")}
-        system "bundle install"
+          "source 'https://rubygems.org'\n\ngem 'sinatra'\ngem 'rspec'\ngem 'pry'\ngem 'sinatra-contrib', :require => 'sinatra/reloader'\ngem 'sinatra-activerecord' \ngem 'rake')")}
+      FileUtils.touch("Rakefile")
+        File.open("Rakefile", 'w') { |file| file.write(
+          "require('sinatra/activerecord')\nrequire('sinatra/activerecord/rake')\n\nnamespace(:db) do\n  task(:load_config)\nend")}
+        system "gem install bundler"
+        system "gem update bundler"
+        system "bundler"
         system "bundle update"
       FileUtils.touch("app.rb")
         File.open("app.rb", 'w') { |file| file.write(
@@ -35,7 +46,7 @@ class Project
       FileUtils.touch("spec/#{@project_name}_spec.rb")
       FileUtils.touch("spec/#{@project_name}_integration_spec.rb")
         FileUtils.cd "views"
-          FileUtils.touch("RENAMETHIS.erb")
+          FileUtils.touch("layout.erb")
           FileUtils.touch("input.erb")
           FileUtils.touch("output.erb")
           FileUtils.touch("home.erb")
