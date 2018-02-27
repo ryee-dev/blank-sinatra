@@ -41,7 +41,7 @@ class Project
         system "bundle update"
       FileUtils.touch("app.rb")
         File.open("app.rb", 'w') { |file| file.write(
-          "require('sinatra')\nrequire('sinatra/reloader')\nalso_reload('lib/**.*.rb')\nrequire('pry')\nrequire('pg')\n\nget('/') do\n  erb(:input)\nend\n\nget('/output') do\n  erb(:output)\nend")}
+          "require('sinatra')\nrequire('sinatra/reloader')\nrequire('sinatra/activerecord')also_reload('lib/**.*.rb')\nrequire('lib/#{@project_name}')\nrequire('pry')\nrequire('pg')\n\nget('/') do\n  erb(:input)\nend\n\nget('/output') do\n  erb(:output)\nend")}
       FileUtils.touch("lib/#{@project_name}.rb")
       FileUtils.touch("spec/#{@project_name}_spec.rb")
       FileUtils.touch("spec/#{@project_name}_integration_spec.rb")
