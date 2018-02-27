@@ -16,7 +16,7 @@ class Project
         FileUtils.cd "config"
         FileUtils.touch("database.yml")
         File.open("database.yml", 'w') { |file| file.write(
-          "development \n  adapter: postgresql\n  database: (insert database here)\n\ntest\n  adapter: postgresql\n  database: (insert test database here)")}
+          "development: \n  adapter: postgresql\n  database: (insert database here)\n\ntest:\n  adapter: postgresql\n  database: (insert test database here)")}
       FileUtils.cd ".."
       FileUtils.mkdir("lib")
       FileUtils.mkdir("views")
