@@ -31,7 +31,7 @@ class Project
       FileUtils.cd ".."
       FileUtils.touch("Gemfile")
         File.open("Gemfile", 'w') { |file| file.write(
-          "source 'https://rubygems.org'\n\ngem 'sinatra'\ngem 'rspec'\ngem 'pry'\ngem 'sinatra-contrib', :require => 'sinatra/reloader'\ngem 'sinatra-activerecord' \ngem 'rake')")}
+          "source 'https://rubygems.org'\n\ngem 'sinatra'\ngem 'rspec'\ngem 'pry'\ngem 'sinatra-contrib', :require => 'sinatra/reloader'\ngem 'sinatra-activerecord' \ngem 'rake'")}
       FileUtils.touch("Rakefile")
         File.open("Rakefile", 'w') { |file| file.write(
           "require('sinatra/activerecord')\nrequire('sinatra/activerecord/rake')\n\nnamespace(:db) do\n  task(:load_config)\nend")}
